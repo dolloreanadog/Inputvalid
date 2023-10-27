@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- Set language to english-->
+<html lang="en">
+<!-- Head tag to contain metadata for document-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Give document's title-->
+        <title>The Jungle</title>
+        <!-- CSS to style page-->
+        <style>
+            body{
+                font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+                background-color: darkolivegreen;
+                color: blanchedalmond;
+            }
+            .container{
+                max-width: 600px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: darkslategrey;
+                box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+            }
+            .warning{
+                color: red;
+            }
+            h1{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Main container for content-->
+        <div class="container">
+            <!-- Header as a title-->
+            <h1>Welcome to the Jungle</h1>
+            <!-- Instructions for user-->
+            <p style="text-align: center;">To get hunting license, Enter the details</p>
+            <!-- Single form for all inputs-->
+            <form id="hunterForm">
+                <!-- Label for first name textbox-->
+                <label for="firstName">First Name</label>
+                <!-- first name textbox for input-->
+                <input type="text" id="firstName" placeholder="Enter your first name" required><br><br>
+                <!-- label for last name textbox-->
+                <label for="lastName">Last Name</label>
+                <!-- last name textbox for input-->
+                <input type="text" id="lastName" placeholder="Enter your last name" required><br><br>
+                <!-- label for Zip code textbox-->
+                <label for="zipcode">Zipcode</label>
+                <!-- Zip code textbox for input-->
+                <input type="text" id="zipcode" placeholder="Enter your zipcode" required><br><br>
+                <!-- Add a submit button-->
+                <input type="submit" value="Get License">
+            </form>
+
+            <!-- div to hold warning message details, hidden by default-->
+            <div class="warning" id="warningMessage"></div>
+
+            <!-- div to hold success message, hidden by default-->
+            <div id="successMessage" style="display: none;">
+                It's a success, you'll get a license soon. Happy hunting!
+            </div>
+
+            <!-- Add Javascript for validation-->
+            <script>
+                // Event listener for the form for validation when the user presses submit the form
+                document.getElementById("hunterForm").addEventListener("submit", function(event){
+                    // prevent default form submit action
+                    event.preventDefault();
+                    // get values from the form user typed
+                    var firstName = document.getElementById("firstName").value;
+                    var lastName = document.getElementById("lastName").value;
+                    var zipcode = document.getElementById("zipcode").value;
+                
+                
+                // combines first & last name
+                const fullName = firstName + " " + lastName;
+                
+                // check if the entire name isn't 25 characters long
+                if(fullName.length > 25){
+                    // If over 25 characters long, raised because of my name
+                    document.getElementById("warningMessage").innerHTML = "Name won't fit on the license";
+                    return;
+                }
+
+                // Check if zipcode is 5 characters long
+                // This part will get how many characters are in the string
+                if(zipcode.length != 5){
+                    //if not 5 characters long, show warning message
+                    document.getElementById("warningMessage").innerHTML = "Invalid zipcode";
+                    return;
+                }
+
+                // if validation passes, congratulate user & hide error if there is
+                document.getElementById("warningMessage").innerHTML = "";
+                document.getElementById("successMessage").style.display = "block";
+                });
+            </script>
+        </div>
+    </body>
+</html>
